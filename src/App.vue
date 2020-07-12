@@ -1,61 +1,76 @@
 <template>
   <v-app>
     <v-app-bar
+      id="nav"
       app
-      color="primary"
+      color="#14b1ab"
       dark
+      height="75px"
     >
       <div class="d-flex align-center">
         <v-img
-          alt="Vuetify Logo"
+          alt="Movie Recommender"
           class="shrink mr-2"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          src="./assets/logo.svg"
           transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
+          width="200"
         />
       </div>
 
       <v-spacer></v-spacer>
 
+        <v-btn
+          text
+          to="/"
+        >
+          <span class="mr-2">Home</span>
+        </v-btn>
+        <v-btn
+          text
+          to="/about"
+        >
+          <span class="mr-2">About</span>
+        </v-btn>
+
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
+        href="#"
         text
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+        <span class="mr-2">Sign in</span>
       </v-btn>
     </v-app-bar>
 
     <v-content>
-      <HelloWorld/>
+      <router-view/>
     </v-content>
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
 
 export default Vue.extend({
   name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
 });
 </script>
+
+<style lang="scss" scoped>
+  #nav {
+
+  a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #2c3e50;
+    margin: 0 0.5em;
+
+    span>span{
+      margin: 0 0.5rem;
+    }
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
+</style>
