@@ -58,19 +58,19 @@ export default Vue.extend({
 <style lang="scss" scoped>
   #nav {
 
-  a {
-    font-weight: bold;
-    text-decoration: none;
-    color: #2c3e50;
-    margin: 0 0.5em;
+    a {
+      font-weight: bold;
+      text-decoration: none;
+      color: #2c3e50;
+      margin: 0 0.5em;
 
-    span>span{
-      margin: 0 0.5rem;
-    }
+      span>span{
+        margin: 0 0.5rem;
+      }
 
-    &.router-link-exact-active {
-      color: #42b983;
+      &.router-link-exact-active {
+        color: #42b983;
+      }
     }
   }
-}
 </style>
