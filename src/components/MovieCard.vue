@@ -12,15 +12,9 @@
         </v-card-subtitle>
 
         <v-card-actions>
-            <v-btn text>Share</v-btn>
-
-            <v-btn color="purple" text>
-                Explore
-            </v-btn>
-
             <v-spacer></v-spacer>
 
-            <v-btn icon @click="show = !show">
+            <v-btn icon @click="showPlot(cardDetails.imdbID)">
                 <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
             </v-btn>
         </v-card-actions>
@@ -29,9 +23,13 @@
             <div v-show="show">
                 <v-divider></v-divider>
 
-                <v-card-text>
-                    {{cardDetails.Title || ''}}
+                <v-progress-circular class="spinner" v-if="!movie" indeterminate />
+                <v-card-text v-if="movie">
+                    {{movie.Plot}}
                 </v-card-text>
+                <v-card-subtitle v-if="movie">
+                    {{movie.Actors !== 'N/A' ? 'Cast: ' + movie.Actors : ''}}
+                </v-card-subtitle>
             </div>
         </v-expand-transition>
     </v-card>
@@ -39,11 +37,29 @@
 </template>
 
 <script>
+import { getMovieById } from '@/services/movieService';
+
 export default {
   name: 'MovieCard',
   props: ['cardDetails'],
   data: () => ({
     show: false,
+    movie: null,
   }),
+  methods: {
+    async showPlot(imdbID) {
+      this.show = !this.show;
+
+      if (!this.movie) {
+        this.movie = (await getMovieById(imdbID)).data;
+      }
+    },
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+.spinner {
+    margin: 2rem 9rem;
+}
+</style>
