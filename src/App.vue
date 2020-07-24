@@ -28,17 +28,16 @@
         </v-btn>
         <v-btn
           text
+          to="/top"
+        >
+          <span class="mr-2">Top</span>
+        </v-btn>
+        <v-btn
+          text
           to="/about"
         >
           <span class="mr-2">About</span>
         </v-btn>
-
-      <v-btn
-        href="#"
-        text
-      >
-        <span class="mr-2">Sign in</span>
-      </v-btn>
     </v-app-bar>
 
     <v-content>
