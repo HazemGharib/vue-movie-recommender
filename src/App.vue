@@ -34,6 +34,12 @@
         </v-btn>
         <v-btn
           text
+          to="/genres"
+        >
+          <span class="mr-2">Genres</span>
+        </v-btn>
+        <v-btn
+          text
           to="/about"
         >
           <span class="mr-2">About</span>

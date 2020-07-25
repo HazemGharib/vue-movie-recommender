@@ -54,6 +54,65 @@ app.get('/api/movies/top', async (req, res) => {
 	});
 });
 
+app.get(['/api/movies/genre', '/api/movies/genre/:genre'], async (req, res) => {
+	if(!req.params.genre) {
+		return res.status(400).send({error: 'No genre found in request params'});
+	}
+
+	if(req.params.genre.split('').some(ch => ['+', '&'].indexOf(ch) !== -1)) {
+		return res.status(400).send({error: 'Wrong genre format'});
+	}
+
+    axios.get(`${process.env.IMDB_GENRE_MOVIES_URL}${req.params.genre}`)
+	.then((response) => {
+		if(response.status === 200) {
+			var html = response.data;
+			let $ = cheerio.load(html);
+            jsonframe($);
+
+			var moviesFrame = {
+				"movies": {
+					"selector": "div.lister-list .lister-item",
+					"data": [{
+						"title": ".lister-item-content h3.lister-item-header a",
+						"year": ".lister-item-content h3.lister-item-header span.lister-item-year",
+						"poster": {
+							"selector": ".lister-item-image a img",
+							"attr": "src"
+						},
+						"imdbID": {
+							"selector": ".lister-top-right .ribbonize",
+							"attr": "data-tconst"
+						},
+						"rating": {
+							"selector": ".lister-item-content div.ratings-imdb-rating",
+							"attr": "data-value"
+						},
+						"plot": ".lister-item-content p.text-muted:nth-child(4)",
+						"cast": ".lister-item-content p:contains(Directors), p:contains(Director), p:contains(Stars)"
+					}]
+				}
+			};
+
+			const movies = $('body').scrape(moviesFrame, { string: true }).movies.map((movie) => {
+				return {
+					title: movie.title ? movie.title : "N/A",
+					year: movie.year ? movie.year : "N/A",
+					poster: movie.poster ? movie.poster : "N/A",
+					imdbID: movie.imdbID ? movie.imdbID : "N/A",
+					rating: movie.rating ? movie.rating : "N/A",
+					plot: movie.plot ? movie.plot : "N/A",
+					cast: movie.cast ? movie.cast : "N/A",
+				}
+			});
+
+            res.status(200).send({movies});
+		}
+	}, (error) => {
+        res.status(500).send(error);
+	});
+});
+
 app.use('/', serveStatic(path.join(__dirname, '/dist')));
 
 app.get(/.*/, (req, res) => {

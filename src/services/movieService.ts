@@ -19,3 +19,5 @@ export const getMovieByTitle = async (movieTitle: string) => {
 export const getMovieById = async (movieId: string) => axios.get(`${baseUrl}/id/${movieId}`);
 
 export const getTopRatedMovies = async () => axios.get(`${baseUrl}/top`);
+
+export const getMoviesByGenre = async (movieGenre: string) => axios.get(`${baseUrl}/genre/${movieGenre}`);
