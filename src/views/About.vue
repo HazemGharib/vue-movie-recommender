@@ -8,9 +8,15 @@
         <v-card-subtitle class="pb-0">About Me</v-card-subtitle>
 
         <v-card-text class="text--primary">
+            <div>
+                <span>Egyptian</span>
+                <span><img class="flag" src="https://i.imgur.com/gZZNlfM.png"></span>
+            </div>
+
             <div>Agile Developer</div>
 
-            <div>@ServiceRocket <v-icon class="rocket" color="grey">mdi-rocket</v-icon></div>
+            <div>@ServiceRocket <v-icon class="rocket" color="grey">mdi-rocket</v-icon>
+            </div>
         </v-card-text>
 
         <v-card-actions>
@@ -33,13 +39,18 @@
     margin: 10rem auto;
 }
 
+.flag {
+    width: 5%;
+    margin: -5px 5px;
+}
+
 .hire-me {
     color: #4caf50;
     text-decoration: none;
 }
 
 .desclaimer {
-  margin: 10rem 5rem;
+    margin: 10rem 5rem;
 }
 
 .rocket {
