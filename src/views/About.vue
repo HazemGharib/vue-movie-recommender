@@ -1,7 +1,7 @@
 <template>
 <div class="about">
     <v-card class="mx-auto" max-width="400">
-        <v-img class="white--text align-end" height="200px" src="http://shorturl.at/elINQ">
+        <v-img class="white--text align-end" height="200px" src="https://i.imgur.com/UZzg0Y5.jpg">
             <v-card-title>Hazem Gharib</v-card-title>
         </v-img>
 
